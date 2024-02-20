@@ -40,6 +40,9 @@ int cfr_test(int n_threads) {
             , logfile_name
             , "discounted_cfr"
             , Solver::MonteCarolAlg::NONE
+            , 1
+            , 0.1
+            , false
             , n_threads
     );
     solver.train();

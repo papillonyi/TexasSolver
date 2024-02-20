@@ -90,8 +90,8 @@ void split(const string& s, char c,
 void CommandLineTool::processCommand(string input) {
     vector<string> contents;
     split(input,' ',contents);
-    if(contents.size() == 0) contents = {input};
-    if(contents.size() > 2 || contents.size() < 1)throw runtime_error(fmt::format("command not valid: {}",input));
+    if(contents.empty()) contents = {input};
+    if(contents.size() > 2 || contents.empty())throw runtime_error(fmt::format("command not valid: {}",input));
     string command = contents[0];
     string paramstr = contents.size() == 1 ? "" : contents[1];
     if(command == "set_pot"){

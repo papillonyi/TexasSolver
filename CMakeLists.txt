@@ -79,8 +79,9 @@ include_directories(ext/fmt/include ext/fmt)
 add_subdirectory(ext/fmt/)
 
 # ppybind11
-include_directories(ext/pybind11/include)
-add_subdirectory(ext/pybind11)
+include_directories(extern/pybind11/include)
+add_subdirectory(extern/pybind11)
+
 
 include_directories(include)
 
@@ -106,6 +107,11 @@ add_library(TexasSolver
         ${lib_src}
         )
 
+
+#add_library(my_python_module
+#        ${lib_src}
+#)
+
 target_link_libraries(TexasSolver fmt)
 #target_link_libraries(TexasSolver ${Boost_LIBRARIES})
 
@@ -113,6 +119,10 @@ add_executable(test test/test.cpp)
 add_executable(console_solver src/console.cpp)
 target_link_libraries(test gtest TexasSolver)
 target_link_libraries(console_solver TexasSolver)
+
+pybind11_add_module(bindSolver MODULE src/pybind/bindSolver.cpp )
+#target_link_libraries(texas_solver_py PRIVATE fmt)
+target_link_libraries(bindSolver PRIVATE TexasSolver)
 
 #set_property(SOURCE swig/PokerSolver.i PROPERTY CPLUSPLUS ON)
 #SET_SOURCE_FILES_PROPERTIES(PokerSolver.i PROPERTIES CPLUSPLUS ON)
